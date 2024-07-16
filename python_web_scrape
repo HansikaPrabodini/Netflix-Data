@@ -1,0 +1,67 @@
+!pip install imdbpy
+
+import pandas as pd
+
+from imdb import IMDb
+import time
+
+# Function to get IMDb details for a movie or TV show
+def get_imdb_details(title, media_type, retries=3, delay=5):
+    ia = IMDb()
+    for attempt in range(retries):
+        try:
+            if media_type.lower() == 'movie':
+                results = ia.search_movie(title)
+            elif media_type.lower() == 'tv show':
+                results = ia.search_movie(title)  # Use ia.search_movie() since IMDbPY does not have a specific method for TV shows
+            else:
+                return None
+
+            if results:
+                movie = results[0]  # Take the first result
+                ia.update(movie)
+                imdb_details = {
+                    'title': title,  # Ensure we have the title for merging
+                    'popularity': movie.get('rating'),
+                    'vote_count': movie.get('votes'),
+                    'original_language': movie.get('languages')[0] if movie.get('languages') else None,
+                }
+                return imdb_details
+        except Exception as e:
+            print(f"Error occurred for title '{title}' on attempt {attempt + 1}/{retries}: {e}")
+            time.sleep(delay)
+    return None
+
+# Define the path to your Excel file with titles
+file_path = r'C:\Users\Asus\Documents\NT\netflix_titles.xlsx'
+
+# Read the Excel file
+try:
+    df = pd.read_excel(file_path, sheet_name='netflix_titles')
+except UnicodeDecodeError:
+    df = pd.read_excel(file_path, sheet_name='netflix_titles', encoding='latin-1')
+
+# Select rows from 1001 to 2000
+df_subset = df.iloc[1000:2000]
+
+# Initialize an empty list to store IMDb details dictionaries
+imdb_details = []
+
+# Iterate over the selected rows and fetch IMDb details
+for index, row in df_subset.iterrows():
+    imdb_data = get_imdb_details(row['title'], row['type'])
+    if imdb_data:
+        imdb_details.append(imdb_data)
+
+# Create a DataFrame from the list of dictionaries
+imdb_df = pd.DataFrame(imdb_details)
+
+# Merge the IMDb DataFrame with the original DataFrame (selected rows)
+merged_df = pd.merge(df_subset, imdb_df, on='title', how='left')
+
+# Specify the new output Excel file path
+new_output_excel_path = r'C:\Users\Asus\Documents\NT\netflix_titles_with_imdb_ratings_1001_to_2000.xlsx'
+
+# Output updated DataFrame to a new Excel file
+merged_df.to_excel(new_output_excel_path, index=False)
+print(f"New file with IMDb ratings for entries 1001 to 2000 saved as: {new_output_excel_path}")
