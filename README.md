@@ -56,7 +56,7 @@
 ##### {FIXED [Country], [Type]: COUNTD(IF [Type] = "TV Show" THEN [Show Id] END)}
 #### For the ratings bar chart, I used a text file named “radial bar chart values” that I found online. I then joined this file with my dataset and introduced angles (radials) , X , Y for it.
 
-#### This is the Complete Path to Get This -https://medium.com/@klphprabodini/radial-progress-indicator-d8482f72800b
+### This is the Complete Path to Get This -https://medium.com/@klphprabodini/radial-progress-indicator-d8482f72800b
 
 #### In analyzing the relationship between added month, weighted rating (WR), and vote count, I created displays where voting counts and ratings somewhat depended on the months of addition or exhibited a relationship with them.
 #### To achieve this, I created separate graphs for weighted rating (WR) and vote count, and then combined them using dual axes.
