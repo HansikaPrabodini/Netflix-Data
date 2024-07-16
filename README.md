@@ -1,5 +1,8 @@
-In today’s digital age, streaming platforms have revolutionized the way we consume entertainment. Among these platforms, Netflix stands out as a global leader, offering a vast array of content to millions of subscribers worldwide. But have you ever wondered how Netflix usage varies from country to country?
-full article - https://medium.com/@klphprabodini/global-streaming-insights-a-country-by-country-analysis-of-netflix-movies-and-tv-shows-92f9f9b35b5b
+# Global Streaming Insights: A Country-by-Country Analysis of Netflix Movies And TV Shows
+
+## In today’s digital age, streaming platforms have revolutionized the way we consume entertainment. Among these platforms, Netflix stands out as a global leader, offering a vast array of content to millions of subscribers worldwide. But have you ever wondered how Netflix usage varies from country to country?
+
+### full article - https://medium.com/@klphprabodini/global-streaming-insights-a-country-by-country-analysis-of-netflix-movies-and-tv-shows-92f9f9b35b5b
 
 In this article, I’ll dive into a comprehensive country-by-country analysis of Netflix using Tableau, a powerful data visualization tool.
 
